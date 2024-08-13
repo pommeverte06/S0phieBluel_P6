@@ -42,7 +42,8 @@
       </nav>
     </header>
     <main>
-      <section id="introduction"><h6>.</h6>
+      <section id="introduction">
+        <h6>.</h6>
         <figure>
           <img src="./assets/images/sophie-bluel.png" alt="" />
         </figure>
@@ -65,7 +66,8 @@
           </p>
         </article>
       </section>
-      <section id="portfolio"><h6>.</h6>
+      <section id="portfolio">
+        <h6>.</h6>
         <h2>Mes Projets <span class="user-modify"></span></h2>
         <aside id="modale" class="hidden-none">
           <div class="modal-gallery"></div>
@@ -79,29 +81,38 @@
             <i class="fas fa-arrow-left arrow-back"></i>
             <i class="fas fa-times close-add-photo-modale"></i>
             <h2 id="select-photo-form">Ajout photo</h2>
+          
+
+      
+
+
             <div class="photo-upload">
               <div class="image-upload">
-                <label for="image" class="icon-image">
-                  <i class="fa-regular fa-image fa-2xl"></i>
-                  <span class="button-form">+ Ajouter photo</span>
+                <label for="image-upload" class="icon-image">
                   <input
-                  
                     type="file"
-                    id="image"
+                    id="image-upload"
                     name="image"
                     accept=".jpg,.png"
                     required
-                    hidden
+                    style="display: none;"
                   />
-                  <span class="limit-upload">jpg, png : 4mo max</span>
+                  <img id="image-preview" class="image-preview" style="display:none;" />
+                  <i class="fa-regular fa-image fa-2xl"></i>
+                  <span class="button-form">+ Ajouter photo</span>
                 </label>
+                <span class="limit-upload">jpg, png : 4mo max</span>
               </div>
             </div>
+            
+
+
+            
             <div class="select-photo">
               <label for="title">Titre</label>
               <input type="text" id="title" name="title" required />
               <label for="category">Catégorie</label>
-              <select id="category" name="category" ></select>
+              <select id="category" name="category"></select>
             </div>
             <button type="submit" class="submit-button">Valider</button>
           </form>
@@ -121,17 +132,15 @@
           <input type="email" name="email" id="email" />
           <label for="message">Message</label>
           <textarea name="message" id="message" cols="30" rows="10"></textarea>
-          <input type="submit" class="button" value="Envoyer" />
+          <input type="submit" class="button-contact" value="Envoyer" />
         </form>
       </section>
     </main>
 
     <footer>
-      <nav>
-        <ul>
-          <li>Mentions Légales</li>
-        </ul>
-      </nav>
+      <ul>
+        <li>Mentions Légales</li>
+      </ul>
     </footer>
     <script src="script.js"></script>
     <script src="login.js"></script>
