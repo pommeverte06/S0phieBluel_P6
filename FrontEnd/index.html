@@ -81,10 +81,6 @@
             <i class="fas fa-arrow-left arrow-back"></i>
             <i class="fas fa-times close-add-photo-modale"></i>
             <h2 id="select-photo-form">Ajout photo</h2>
-          
-
-      
-
 
             <div class="photo-upload">
               <div class="image-upload">
@@ -95,24 +91,28 @@
                     name="image"
                     accept=".jpg,.png"
                     required
-                    style="display: none;"
+                    style="display: none"
                   />
-                  <img id="image-preview" class="image-preview" style="display:none;" />
+                  <img src=""
+                    id="image-preview"
+                    class="image-preview"
+                    style="display: none"
+                  />
                   <i class="fa-regular fa-image fa-2xl"></i>
                   <span class="button-form">+ Ajouter photo</span>
                 </label>
                 <span class="limit-upload">jpg, png : 4mo max</span>
               </div>
             </div>
-            
 
-
-            
             <div class="select-photo">
               <label for="title">Titre</label>
               <input type="text" id="title" name="title" required />
               <label for="category">Catégorie</label>
               <select id="category" name="category"></select>
+              <option value="" disabled selected hidden>
+                Sélectionnez une catégorie
+              </option>
             </div>
             <button type="submit" class="submit-button">Valider</button>
           </form>
