@@ -35,14 +35,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   };
-
+  //*********************************************************************** */
   // fonction pour mettre à jour les travaux affichés
   const updateWorks = async () => {
     const works = await getWorks();
     showWorks(works);
   };
+  //*************************************************************************** */
 
-  // fonction pour récupérer et afficher les catégories sous forme de boutons
+  // fonction pour récupérer les catégories et afficher les boutons
   const getCategories = async () => {
     try {
       const response = await fetch("http://localhost:5678/api/categories");
@@ -73,7 +74,9 @@ document.addEventListener("DOMContentLoaded", () => {
   updateWorks();
   getCategories();
 
-  // ajout du bouton de modification pour l'utilisateur
+  //************************************************************************** */
+
+  // ajout du lien modifier après login
   const userModify = document.querySelector(".user-modify");
   if (userModify) {
     const divModify = document.createElement("div");
@@ -85,6 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
     userModify.appendChild(divModify);
   }
 
+  //************************************************************************* */
+  //modale gallery pour supprimer photo et modale ajout photo
   const modale = document.getElementById("modale");
   const modalGallery = document.querySelector(".modal-gallery");
   const modalAddPhotoForm = document.getElementById("modal-add-photo");
@@ -146,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.addEventListener("click", closeModalOutsideClick);
     }
   }
-
+  //*********************************************************************** */
   // fonction pour fermer la modale de galerie de photos
   function closeGalleryModal() {
     if (modale) {
@@ -181,94 +186,50 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // // fonction pour afficher la modale d'ajout de photo
-  // function showAddPhotoForm() {
-  //   modalGallery.classList.add("hidden-none");
-  //   modalAddPhotoForm.classList.remove("hidden");
-  //   modalAddPhotoForm.classList.add("active");
+  //************************************************************************** */
 
-  //   window.addEventListener("click", closeModalOutsideClickForAddPhoto);
+  // fonction pour afficher la modale d'ajout de photo
+  function showAddPhotoForm() {
+    modalGallery.classList.add("hidden-none");
+    modalAddPhotoForm.classList.remove("hidden");
+    modalAddPhotoForm.classList.add("active");
 
-  //   const imageInput = document.getElementById("image-upload");
-  //   const imagePreview = document.getElementById("image-preview");
-  //   const iconImage = document.querySelector(".icon-image");
-  //   const categorySelect = document.getElementById("category");
+    window.addEventListener("click", closeModalOutsideClickForAddPhoto);
 
-  //   imageInput.value = ""; // réinitialise l'input file
-  //   imagePreview.style.display = "none"; // masque l'aperçu de l'image précédente
-  //   iconImage.classList.remove("has-preview"); // réinitialise l'état du label
+    const imageInput = document.getElementById("image-upload");
+    const imagePreview = document.getElementById("image-preview");
+    const iconImage = document.querySelector(".icon-image");
+    const categorySelect = document.getElementById("category");
+    const limitUploadText = document.querySelector(".limit-upload");
 
-  //   categorySelect.selectedIndex = 0; // réinitialise la sélection de la catégorie
+    imageInput.value = ""; // réinitialise l'input file
+    imagePreview.style.display = "none";
+    iconImage.classList.remove("has-preview");
 
-  //   // gestion du changement de fichier pour la prévisualisation
-  //   imageInput.addEventListener("change", () => {
-  //     const file = imageInput.files[0];
-  //     if (file) {
-  //       const reader = new FileReader();
-  //       reader.onload = function (e) {
-  //         imagePreview.src = e.target.result;
-  //         imagePreview.style.display = "block";
-  //         iconImage.classList.add("has-preview");
-  //       };
-  //       reader.readAsDataURL(file);
-  //     } else {
-  //       imagePreview.src = "";
-  //       imagePreview.style.display = "none";
-  //       iconImage.classList.remove("has-preview");
-  //     }
-  //   });
-  // }
+    categorySelect.selectedIndex = 0; // réinitialise la sélection de la catégorie
+    limitUploadText.style.display = "block";
 
-
-// fonction pour afficher la modale d'ajout de photo
-function showAddPhotoForm() {
-  modalGallery.classList.add("hidden-none");
-  modalAddPhotoForm.classList.remove("hidden");
-  modalAddPhotoForm.classList.add("active");
-
-  window.addEventListener("click", closeModalOutsideClickForAddPhoto);
-
-  const imageInput = document.getElementById("image-upload");
-  const imagePreview = document.getElementById("image-preview");
-  const iconImage = document.querySelector(".icon-image");
-  const categorySelect = document.getElementById("category");
-  const limitUploadText = document.querySelector(".limit-upload");
-
-  imageInput.value = ""; // réinitialise l'input file
-  imagePreview.style.display = "none"; // masque l'aperçu de l'image précédente
-  iconImage.classList.remove("has-preview"); // réinitialise l'état du label
-
-  categorySelect.selectedIndex = 0; // réinitialise la sélection de la catégorie
-  limitUploadText.style.display = "block"; // assure que le texte est visible lorsque l'image n'est pas sélectionnée
-
-  // gestion du changement de fichier pour la prévisualisation
-  imageInput.addEventListener("change", () => {
-    const file = imageInput.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        imagePreview.src = e.target.result;
-        imagePreview.style.display = "block";
-        iconImage.classList.add("has-preview");
-        limitUploadText.style.display = "none"; // masque le texte lorsqu'une image est sélectionnée
-      };
-      reader.readAsDataURL(file);
-    } else {
-      imagePreview.src = "";
-      imagePreview.style.display = "none";
-      iconImage.classList.remove("has-preview");
-      limitUploadText.style.display = "block"; // assure que le texte est visible lorsque l'image n'est pas sélectionnée
-    }
-  });
-}
-
-
-
-
-
-
-
-
+    // gestion du changement de fichier pour la prévisualisation
+    imageInput.addEventListener("change", () => {
+      const file = imageInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          imagePreview.src = e.target.result;
+          imagePreview.style.display = "block";
+          iconImage.classList.add("has-preview");
+          limitUploadText.style.display = "none";
+        };
+        reader.readAsDataURL(file);
+      } else {
+        imagePreview.src = "";
+        imagePreview.style.display = "none";
+        iconImage.classList.remove("has-preview");
+        limitUploadText.style.display = "block";
+      }
+    });
+  }
+  //************************************************************************** */
   // fonction pour afficher la galerie de photos dans la modale
   function showPhotoGallery() {
     modalGallery.classList.remove("hidden-none");
@@ -276,7 +237,7 @@ function showAddPhotoForm() {
     modalAddPhotoForm.classList.remove("active");
   }
 
-  // attache l'événement de clic sur la flèche pour revenir à la galerie
+  // événement de clic sur la flèche pour revenir à la galerie
   const arrowBack = document.querySelector(".arrow-back");
   if (arrowBack) {
     arrowBack.addEventListener("click", showPhotoGallery);
@@ -289,10 +250,10 @@ function showAddPhotoForm() {
       const categories = await response.json();
       const categorySelect = document.getElementById("category");
 
-      // ajout d'une option par défaut pour sélectionner une catégorie
+      // ajout de l'option vide dans la liste catégories
       const defaultOption = document.createElement("option");
       defaultOption.value = "";
-      defaultOption.textContent = "Sélectionnez une catégorie";
+      defaultOption.textContent = "";
       defaultOption.disabled = true;
       defaultOption.selected = true;
       categorySelect.appendChild(defaultOption);
@@ -307,6 +268,8 @@ function showAddPhotoForm() {
       console.error("il y a eu un problème avec la requête fetch:", error);
     }
   }
+
+  //******************************************************************** */
 
   // fonction pour envoyer les données d'un nouveau travail
   async function postDatas() {
@@ -387,61 +350,47 @@ function showAddPhotoForm() {
       }
     });
   }
+  //**************************************************************************** */
+  // fonction pour supprimer une image existante
+  function removeImage(id, event) {
+    event.preventDefault();
 
-  
+    if (confirm("Êtes-vous sûr(e) de vouloir supprimer ce projet?")) {
+      const token = localStorage.getItem("token");
 
-// fonction pour supprimer une image existante
-function removeImage(id, event) {
-  event.preventDefault();
-
-  if (confirm("êtes-vous sûr(e) de vouloir supprimer ce projet?")) {
-    const token = localStorage.getItem("token");
-
-    fetch(`http://localhost:5678/api/works/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Supprimer l'image de la modale
-          const trashIcon = event.target;
-          const stampImages = trashIcon.closest(".stamp-images");
-          if (stampImages) {
-            stampImages.remove();
-          }
-
-          // Supprimer l'image de la galerie principale
-          updateWorks(); // Cette fonction va actualiser la galerie principale pour refléter les changements
-
-        } else {
-          console.error("erreur lors de la suppression de l'image");
-        }
+      fetch(`http://localhost:5678/api/works/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
-      .catch((error) => {
-        console.error("il y a eu un problème avec la requête fetch:", error);
-      });
+        .then((response) => {
+          if (response.ok) {
+            // supprimer l'image de la modale
+            const trashIcon = event.target;
+            const stampImages = trashIcon.closest(".stamp-images");
+            if (stampImages) {
+              stampImages.remove();
+            }
+
+            // supprime en plus l'image de la galerie principale
+            updateWorks(); // fonction actualisation de la galerie
+          } else {
+            console.error("erreur lors de la suppression de l'image");
+          }
+        })
+        .catch((error) => {
+          console.error("il y a eu un problème avec la requête fetch:", error);
+        });
+    }
   }
-}
 
-
-
-
-
-
-
-
-
-
-
-  
-  // attache les événements pour fermer la modale d'ajout de photo
+  // fermer la modale d'ajout de photo
   if (closeAddPhotoModale) {
     closeAddPhotoModale.addEventListener("click", closeAddPhotoModal);
   }
 
-  // attache l'événement pour ouvrir la modale de galerie de photos
+  //  ouvrir la modale de galerie de photos
   if (userModify) {
     userModify.addEventListener("click", openModal);
   }
