@@ -11,7 +11,7 @@
       rel="stylesheet"
     />
     <meta name="description" content="" />
-    <link rel="shortcut icon"  href="favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
@@ -20,33 +20,39 @@
       <nav>
         <ul>
           <li><a href="#">projets</a></li>
-          <li><a href="#">contact</a></li>
-          <li><a class="log-in-out"   href="index.html">login</a></li>
-          <li><img class="logo-insta" src="./assets/icons/instagram.png" alt="Instagram" /></li>
+          <li><a href="#contact">contact</a></li>
+          <li><a class="log-in-out" href="index.html">login</a></li>
+          <li>
+            <img
+              class="logo-insta"
+              src="./assets/icons/instagram.png"
+              alt="Instagram"
+            />
+          </li>
         </ul>
       </nav>
     </header>
 
-<main>
-    <section id="contact">
+    <main>
+      <section id="contact">
         <h2>Log in</h2>
         <form id="login-form" method="post">
           <label for="email">Email</label>
-          <input type="email" name="email" id="email" required/>
+          <input type="email" name="email" id="email" required />
           <label for="password">Mot de passe</label>
-          <input type="password" name="password" id="password" required/>
+          <input type="password" name="password" id="password" required />
           <input type="submit" value="Se connecter" />
           <p id="forget-password">Mot de passe oublié</p>
         </form>
       </section>
-</main>
+    </main>
+
     <footer>
-        <ul>
-          <li>Mentions Légales</li>
-        </ul>
+      <ul>
+        <li>Mentions Légales</li>
+      </ul>
     </footer>
-    
+
     <script src="login.js"></script>
-    <!-- <script src="script.js"></script> -->
   </body>
 </html>

@@ -22,13 +22,14 @@
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
+    <!-- ****************************************************** -->
     <header>
       <div class="black-header"></div>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
         <ul>
-          <li><a href="index.html">projets</a></li>
-          <li><a href="#">contact</a></li>
+          <li><a href="#">projets</a></li>
+          <li><a href="#contact">contact</a></li>
 
           <li><a class="log-in-out" href="login.html">login</a></li>
           <li>
@@ -41,11 +42,15 @@
         </ul>
       </nav>
     </header>
+    <!-- ************************************************************* -->
     <main>
       <section id="introduction">
         <h6>.</h6>
         <figure>
-          <img src="./assets/images/sophie-bluel.png" alt="" />
+          <img
+            src="./assets/images/sophie-bluel.png"
+            alt="photo de sophie bluel"
+          />
         </figure>
         <article class="article">
           <h2>Designer d'espace</h2>
@@ -53,6 +58,7 @@
             Je raconte votre histoire, je valorise vos idées. Je vous accompagne
             de la conception à la livraison finale du chantier.
           </p>
+          <br />
           <p>
             Chaque projet sera étudié en commun, de façon à mettre en valeur les
             volumes, les matières et les couleurs dans le respect de l’esprit
@@ -60,18 +66,20 @@
             sera assuré dans le souci du détail, le respect du planning et du
             budget.
           </p>
+          <br />
           <p>
             En cas de besoin, une équipe pluridisciplinaire peut-être constituée
             : architecte DPLG, décorateur(trice).
           </p>
         </article>
       </section>
+      <!-- ***************************************************************** -->
       <section id="portfolio">
         <h6>.</h6>
         <h2>Mes Projets <span class="user-modify"></span></h2>
         <aside id="modale" class="hidden-none">
           <div class="modal-gallery"></div>
-
+          <!--  form ajout photos -->
           <form
             id="modal-add-photo"
             method="POST"
@@ -93,7 +101,9 @@
                     required
                     style="display: none"
                   />
-                  <img src=""
+                  <img
+                    src="#"
+                    alt=""
                     id="image-preview"
                     class="image-preview"
                     style="display: none"
@@ -109,19 +119,20 @@
               <label for="title">Titre</label>
               <input type="text" id="title" name="title" required />
               <label for="category">Catégorie</label>
-              <select id="category" name="category"></select>
-              <option value="" disabled selected hidden>
-                Sélectionnez une catégorie
-              </option>
+              <select id="category" name="category">
+                <option value="" disabled selected hidden></option>
+              </select>
             </div>
             <button type="submit" class="submit-button">Valider</button>
           </form>
         </aside>
+        <!-- ***************************************************** -->
         <div class="filters">
           <button id="0" class="button">Tous</button>
         </div>
         <div class="gallery"></div>
       </section>
+      <!-- ****************************************************** -->
       <section id="contact">
         <h2>Contact</h2>
         <p>Vous avez un projet ? Discutons-en !</p>

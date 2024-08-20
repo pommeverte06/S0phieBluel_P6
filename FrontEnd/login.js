@@ -1,5 +1,3 @@
-
-
 //connexion page de login
 const loginForm = document.getElementById("login-form");
 
@@ -41,22 +39,22 @@ loginForm.addEventListener("submit", async (event) => {
 document.addEventListener("DOMContentLoaded", () => {
   const loggedIn = window.localStorage.getItem("loggedIn");
   const blackHeader = document.querySelector(".black-header");
-  const pageHeader = document.querySelector("header"); // Sélectionne le header de la page
+  const pageHeader = document.querySelector("header");
 
   if (loggedIn === "true") {
-    // Supprimer la barre de filtres
+    // supprimer la barre de filtres
     const filters = document.querySelector(".filters");
     if (filters) {
       filters.classList.add("hidden");
     }
 
-    // Ajouter le lien modifier
+    // ajouter le lien modifier
     const userModify = document.querySelector(".user-modify");
     if (userModify) {
       userModify.classList.add("active");
     }
 
-    // Modifier les liens de login et logout après la connexion
+    // modifier les liens de login et logout après la connexion
     const logInOut = document.querySelector(".log-in-out");
     if (logInOut) {
       logInOut.textContent = "logout";
@@ -67,45 +65,45 @@ document.addEventListener("DOMContentLoaded", () => {
         window.localStorage.removeItem("loggedIn");
         window.location.href = "index.html";
 
-        // Supprimer la bande noire lors de la déconnexion
+        // supprimer la bande noire lors de la déconnexion
         if (blackHeader) {
-          blackHeader.classList.add("hidden"); // Ajouter la classe hidden pour masquer la bande
+          blackHeader.classList.add("hidden");
 
-          // Remettre le header à sa position d'origine
+          // remettre le header à sa position d'origine
           if (pageHeader) {
-            pageHeader.style.marginTop = "0"; // Enlever le margin-top du header
+            pageHeader.style.marginTop = "0";
           }
         }
       });
     }
 
-    // Ajouter dynamiquement le mode édition dans la bande noire
+    // ajouter la phrase mode édition dans la bande noire
     if (blackHeader) {
-      blackHeader.classList.remove("hidden"); // S'assurer que la bande est visible quand connecté
+      blackHeader.classList.remove("hidden"); // bande visible quand connecté
       const editIcon = document.createElement("i");
       editIcon.className = "fa fa-pen-to-square";
 
       const editText = document.createElement("span");
       editText.textContent = "Mode édition";
-      editText.style.marginLeft = "10px"; // Espace entre l'icône et le texte
+      editText.style.marginLeft = "10px";
 
       blackHeader.appendChild(editIcon);
       blackHeader.appendChild(editText);
 
-      // Ajuster le margin-top du header pour décaler le contenu
+      // margin-top du header pour décaler le contenu
       if (pageHeader) {
-        pageHeader.style.marginTop = "70px"; // Ajoute un margin-top fixe pour plus d'espace
+        pageHeader.style.marginTop = "70px";
       }
     }
   } else {
-    // Ajouter la classe hidden si l'utilisateur n'est pas connecté
+    //classe hidden si non connecté
     if (blackHeader) {
       blackHeader.classList.add("hidden");
     }
 
-    // S'assurer que le header est bien en haut si non connecté
+    //header en haut si non connecté
     if (pageHeader) {
-      pageHeader.style.marginTop = "50"; // Remettre le margin-top à 50 si non connecté
+      pageHeader.style.marginTop = "50";
     }
   }
 });
