@@ -20,7 +20,7 @@ Ces éléments seront développés from scratch, m'offrant l'opportunité de met
 
 J'ai accès à un code back-end pour tester les fonctionnalités, pour apprendre à communiquer avec une API, afin de développer une application web moderne.
 
-Pour ce faire, je vais utiliser Figma pour accéder aux maquettes, Visual Studio Code pour le développement, et GitHub pour la gestion de version de votre projet.
+Pour ce faire, je vais utiliser Figma pour accéder aux maquettes, Visual Studio Code pour le développement, et GitHub pour la gestion de version du projet.
 
  ## Objectifs pédagogiques
 -Gérer les événements utilisateurs avec JavaScript
