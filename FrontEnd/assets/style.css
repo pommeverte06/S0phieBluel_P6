@@ -514,9 +514,14 @@ input[type="text"] {
   bottom: 50px;
 }
 
-.submit-button:hover {
-  opacity: 0.8;
+.submit-button:disabled {
   background-color: #a7a7a7;
+  cursor: not-allowed;
+}
+
+.submit-button:not(:disabled) {
+  background-color: #1d6154;
+  cursor: pointer;
 }
 
 /* ************************************************************** */
@@ -587,6 +592,10 @@ input[type="submit"] {
   cursor: pointer;
 }
 
+input[type="submit"]:hover {
+  background-color: black;
+  color: white;
+}
 #image {
   display: none;
 }

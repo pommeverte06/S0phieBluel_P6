@@ -190,6 +190,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // fonction pour afficher la modale d'ajout de photo
   function showAddPhotoForm() {
+    // Réinitialiser le formulaire d'ajout de photo
+    resetAddPhotoForm();
+
     modalGallery.classList.add("hidden-none");
     modalAddPhotoForm.classList.remove("hidden");
     modalAddPhotoForm.classList.add("active");
@@ -276,8 +279,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return new Promise((resolve, reject) => {
       const token = localStorage.getItem("token");
       if (!token) {
-        console.error("token non trouvé. veuillez vous connecter.");
-        reject("token non trouvé. veuillez vous connecter.");
+        console.error("token non trouvé");
+        reject("token non trouvé");
         return;
       }
 
@@ -299,6 +302,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const title = modalAddPhotoForm.elements["title"].value;
       const category = modalAddPhotoForm.elements["category"].value;
 
+      if (!file || !title || !category) {
+        console.log("formulaire pas correctement rempli");
+        reject("formulaire pas correctement rempli");
+      }
+
       const formData = new FormData();
       formData.append("image", file);
       formData.append("title", title);
@@ -315,7 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
         .then((response) => {
           if (response.status === 201) {
-            resolve("l'image a été ajoutée avec succès !");
+            resolve("l'image a été ajoutée avec succès!");
           } else {
             response.json().then((data) => {
               reject(
@@ -350,8 +358,49 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  //******************************************************************** */
+  //fonction pour empecher lajout des photos si les champs non remplis
+  function checkFormValidity() {
+    const title = document.getElementById("title").value;
+    const category = document.getElementById("category").value;
+    const imageInput = document.getElementById("image-upload").files.length > 0;
+    const submitButton = document.querySelector(".submit-button");
+
+    //vérifie si tous les champs sont remplis
+    if (title && category && imageInput) {
+      submitButton.disabled = false; // Active le bouton
+      submitButton.style.backgroundColor = "#1d6154"; // Vert foncé
+    } else {
+      submitButton.disabled = true; // Désactive le bouton
+      submitButton.style.backgroundColor = "#a7a7a7"; // Gris par défaut
+    }
+  }
+
+  //écouteurs d'événements pour chaque champ du formulaire
+  document.getElementById("title").addEventListener("input", checkFormValidity);
+  document.getElementById("category").addEventListener("change", checkFormValidity);
+  document.getElementById("image-upload").addEventListener("change", checkFormValidity);
+
+  //réinitialise le bouton "valider"
+  function resetAddPhotoForm() {
+    const title = document.getElementById("title");
+    const category = document.getElementById("category");
+    const imageInput = document.getElementById("image-upload");
+    const submitButton = document.querySelector(".submit-button");
+
+    // réinitialise valeur des champs
+    title.value = "";
+    category.selectedIndex = 0;
+    imageInput.value = "";
+
+    // réinitialise couleur du bouton
+    submitButton.disabled = true;
+    submitButton.style.backgroundColor = "#a7a7a7"; 
+  }
+
   //**************************************************************************** */
-  // fonction pour supprimer une image existante
+  // fonction pour supprimer une image de la galerie
   function removeImage(id, event) {
     event.preventDefault();
 
