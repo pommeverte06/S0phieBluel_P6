@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const works = await response.json();
       return works;
     } catch (error) {
-      console.error("il y a eu un problème avec la requête fetch:", error);
+      console.error("il y a un problème avec la requête fetch:", error);
     }
   };
 
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch("http://localhost:5678/api/categories");
       const categories = await response.json();
 
-      const tous = document.getElementById("0");
+      const tous = document.getElementById("tous");
       tous.addEventListener("click", () => {
         filter = "0";
         updateWorks();
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       });
     } catch (error) {
-      console.error("il y a eu un problème avec la requête fetch:", error);
+      console.error("il y a un problème avec la requête fetch:", error);
     }
   };
 
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   //************************************************************************* */
-  //modale gallery pour supprimer photo et modale ajout photo
+  //modale gallery pour supprimer photos et modale addphoto
   const modale = document.getElementById("modale");
   const modalGallery = document.querySelector(".modal-gallery");
   const modalAddPhotoForm = document.getElementById("modal-add-photo");
@@ -275,71 +275,66 @@ document.addEventListener("DOMContentLoaded", () => {
   //******************************************************************** */
 
   // fonction pour envoyer les données d'un nouveau travail
-  async function postDatas() {
-    return new Promise((resolve, reject) => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        console.error("token non trouvé");
-        reject("token non trouvé");
-        return;
-      }
+  const postDatas = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("token non trouvé");
+      throw new Error("token non trouvé");
+    }
 
-      const imageInput = document.getElementById("image-upload");
-      console.log("champ image-upload détecté :", imageInput);
+    const imageInput = document.getElementById("image-upload");
+    console.log("champ image-upload détecté :", imageInput);
 
-      if (!imageInput) {
-        console.error("le champ de fichier n'a pas été trouvé.");
-        return;
-      }
+    if (!imageInput) {
+      console.error("le champ de fichier n'a pas été trouvé.");
+      throw new Error("le champ de fichier n'a pas été trouvé.");
+    }
 
-      const file = imageInput.files[0];
-      if (!file) {
-        console.error("aucun fichier sélectionné.");
-        reject("aucun fichier sélectionné.");
-        return;
-      }
+    const file = imageInput.files[0];
+    if (!file) {
+      console.error("aucun fichier sélectionné.");
+      throw new Error("aucun fichier sélectionné.");
+    }
 
-      const title = modalAddPhotoForm.elements["title"].value;
-      const category = modalAddPhotoForm.elements["category"].value;
+    const title = modalAddPhotoForm.elements["title"].value;
+    const category = modalAddPhotoForm.elements["category"].value;
 
-      if (!file || !title || !category) {
-        console.log("formulaire pas correctement rempli");
-        reject("formulaire pas correctement rempli");
-      }
+    if (!file || !title || !category) {
+      console.error("formulaire pas correctement rempli");
+      throw new Error("formulaire pas correctement rempli");
+    }
 
-      const formData = new FormData();
-      formData.append("image", file);
-      formData.append("title", title);
-      formData.append("category", category);
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("title", title);
+    formData.append("category", category);
 
-      console.log("fichier sélectionné:", file);
+    console.log("fichier sélectionné:", file);
 
-      fetch("http://localhost:5678/api/works", {
+    try {
+      const response = await fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
         },
         body: formData,
-      })
-        .then((response) => {
-          if (response.status === 201) {
-            resolve("l'image a été ajoutée avec succès!");
-          } else {
-            response.json().then((data) => {
-              reject(
-                `erreur lors de l'ajout de l'image: ${
-                  data.message || response.statusText
-                }`
-              );
-            });
-          }
-        })
-        .catch((error) => {
-          console.error("erreur de réseau ou autre:", error.message);
-          reject(`erreur de réseau ou autre: ${error.message}`);
-        });
-    });
-  }
+      });
+
+      if (response.status === 201) {
+        return "l'image a été ajoutée avec succès!";
+      } else {
+        const data = await response.json();
+        throw new Error(
+          `erreur lors de l'ajout de l'image: ${
+            data.message || response.statusText
+          }`
+        );
+      }
+    } catch (error) {
+      console.error("erreur de réseau ou autre:", error.message);
+      throw new Error(`erreur de réseau ou autre: ${error.message}`);
+    }
+  };
 
   // gestion de l'envoi du formulaire d'ajout de photo
   if (modalAddPhotoForm) {
@@ -379,8 +374,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //écouteurs d'événements pour chaque champ du formulaire
   document.getElementById("title").addEventListener("input", checkFormValidity);
-  document.getElementById("category").addEventListener("change", checkFormValidity);
-  document.getElementById("image-upload").addEventListener("change", checkFormValidity);
+  document
+    .getElementById("category")
+    .addEventListener("change", checkFormValidity);
+  document
+    .getElementById("image-upload")
+    .addEventListener("change", checkFormValidity);
 
   //réinitialise le bouton "valider"
   function resetAddPhotoForm() {
@@ -396,7 +395,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // réinitialise couleur du bouton
     submitButton.disabled = true;
-    submitButton.style.backgroundColor = "#a7a7a7"; 
+    submitButton.style.backgroundColor = "#a7a7a7";
   }
 
   //**************************************************************************** */
