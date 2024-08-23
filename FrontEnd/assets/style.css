@@ -181,6 +181,10 @@ nav li {
   text-align: center;
   margin-bottom: 1em;
 }
+.filters button.active {
+  background-color: #1d6154;
+  color: white;
+}
 
 .user-modify {
   color: black;
@@ -222,7 +226,7 @@ button {
   padding-left: 20px;
   padding-right: 20px;
   font-family: "syne";
-  transition: all 200ms ease-in;
+  transition: all 250ms ease-in;
 }
 
 button:hover {
@@ -234,7 +238,6 @@ button:hover {
 
 #modale {
   visibility: hidden;
-
   position: fixed;
   z-index: 200;
   left: 0;

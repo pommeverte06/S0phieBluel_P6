@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
       tous.addEventListener("click", () => {
         filter = "0";
         updateWorks();
+        toggleActiveButton(tous);
       });
 
       categories.forEach((category) => {
@@ -63,11 +64,20 @@ document.addEventListener("DOMContentLoaded", () => {
         button.addEventListener("click", () => {
           filter = category.id.toString();
           updateWorks();
+          toggleActiveButton(button);
         });
       });
     } catch (error) {
       console.error("il y a un problème avec la requête fetch:", error);
     }
+  };
+
+  //fonction toggle selectionne le bouton filtre actif
+  const toggleActiveButton = (selectedButton) => {
+    const buttons = document.querySelectorAll(".filters button");
+    buttons.forEach((button) => button.classList.remove("active"));
+
+    selectedButton.classList.toggle("active");
   };
 
   // initialisation des travaux et des catégories
