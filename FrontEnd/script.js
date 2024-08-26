@@ -35,13 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   };
-  //*********************************************************************** */
+
   // fonction pour mettre à jour les travaux affichés
   const updateWorks = async () => {
     const works = await getWorks();
     showWorks(works);
   };
-  //*************************************************************************** */
 
   // fonction pour récupérer les catégories et afficher les boutons
   const getCategories = async () => {
@@ -84,8 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateWorks();
   getCategories();
 
-  //************************************************************************** */
-
   // ajout du lien modifier après login
   const userModify = document.querySelector(".user-modify");
   if (userModify) {
@@ -98,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
     userModify.appendChild(divModify);
   }
 
-  //************************************************************************* */
   //modale gallery pour supprimer photos et modale addphoto
   const modale = document.getElementById("modale");
   const modalGallery = document.querySelector(".modal-gallery");
@@ -161,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.addEventListener("click", closeModalOutsideClick);
     }
   }
-  //*********************************************************************** */
+
   // fonction pour fermer la modale de galerie de photos
   function closeGalleryModal() {
     if (modale) {
@@ -196,11 +192,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  //************************************************************************** */
-
   // fonction pour afficher la modale d'ajout de photo
   function showAddPhotoForm() {
-    // Réinitialiser le formulaire d'ajout de photo
+    // réinitialise le formulaire d'ajout de photo
     resetAddPhotoForm();
 
     modalGallery.classList.add("hidden-none");
@@ -242,7 +236,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-  //************************************************************************** */
   // fonction pour afficher la galerie de photos dans la modale
   function showPhotoGallery() {
     modalGallery.classList.remove("hidden-none");
@@ -278,31 +271,25 @@ document.addEventListener("DOMContentLoaded", () => {
         categorySelect.appendChild(option);
       });
     } catch (error) {
-      console.error("il y a eu un problème avec la requête fetch:", error);
+      console.error("il y a un problème avec la requête fetch:", error);
     }
   }
-
-  //******************************************************************** */
 
   // fonction pour envoyer les données d'un nouveau travail
   const postDatas = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      console.error("token non trouvé");
       throw new Error("token non trouvé");
     }
 
     const imageInput = document.getElementById("image-upload");
-    console.log("champ image-upload détecté :", imageInput);
 
     if (!imageInput) {
-      console.error("le champ de fichier n'a pas été trouvé.");
       throw new Error("le champ de fichier n'a pas été trouvé.");
     }
 
     const file = imageInput.files[0];
     if (!file) {
-      console.error("aucun fichier sélectionné.");
       throw new Error("aucun fichier sélectionné.");
     }
 
@@ -310,7 +297,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const category = modalAddPhotoForm.elements["category"].value;
 
     if (!file || !title || !category) {
-      console.error("formulaire pas correctement rempli");
       throw new Error("formulaire pas correctement rempli");
     }
 
@@ -318,8 +304,6 @@ document.addEventListener("DOMContentLoaded", () => {
     formData.append("image", file);
     formData.append("title", title);
     formData.append("category", category);
-
-    console.log("fichier sélectionné:", file);
 
     try {
       const response = await fetch("http://localhost:5678/api/works", {
@@ -341,7 +325,6 @@ document.addEventListener("DOMContentLoaded", () => {
         );
       }
     } catch (error) {
-      console.error("erreur de réseau ou autre:", error.message);
       throw new Error(`erreur de réseau ou autre: ${error.message}`);
     }
   };
@@ -353,18 +336,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         const message = await postDatas();
-        console.log(message);
         modalAddPhotoForm.reset();
         updateWorks();
         closeAddPhotoModal();
+        closeGalleryModal();
       } catch (error) {
-        console.error(error);
         alert(error);
       }
     });
   }
 
-  //******************************************************************** */
   //fonction pour empecher lajout des photos si les champs non remplis
   function checkFormValidity() {
     const title = document.getElementById("title").value;
@@ -374,11 +355,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //vérifie si tous les champs sont remplis
     if (title && category && imageInput) {
-      submitButton.disabled = false; // Active le bouton
-      submitButton.style.backgroundColor = "#1d6154"; // Vert foncé
+      submitButton.disabled = false;
+      submitButton.style.backgroundColor = "#1d6154";
     } else {
-      submitButton.disabled = true; // Désactive le bouton
-      submitButton.style.backgroundColor = "#a7a7a7"; // Gris par défaut
+      submitButton.disabled = true;
+      submitButton.style.backgroundColor = "#a7a7a7";
     }
   }
 
@@ -408,7 +389,6 @@ document.addEventListener("DOMContentLoaded", () => {
     submitButton.style.backgroundColor = "#a7a7a7";
   }
 
-  //**************************************************************************** */
   // fonction pour supprimer une image de la galerie
   function removeImage(id, event) {
     event.preventDefault();
@@ -432,13 +412,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // supprime en plus l'image de la galerie principale
-            updateWorks(); // fonction actualisation de la galerie
+            updateWorks();
           } else {
             console.error("erreur lors de la suppression de l'image");
           }
         })
         .catch((error) => {
-          console.error("il y a eu un problème avec la requête fetch:", error);
+          console.error("il y a un problème avec la requête fetch:", error);
         });
     }
   }

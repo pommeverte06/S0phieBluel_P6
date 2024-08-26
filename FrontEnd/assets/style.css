@@ -134,7 +134,6 @@ nav li {
   font-size: 16px;
   font-weight: normal;
 }
-/* *********************************************************************** */
 
 .logo-insta {
   width: 20px;
@@ -210,7 +209,6 @@ nav li {
 .display-block {
   display: block;
 }
-/* ****************************************************************** */
 .button,
 button {
   border-radius: 60px;
@@ -227,14 +225,13 @@ button {
   padding-right: 20px;
   font-family: "syne";
   transition: all 250ms ease-in;
+  cursor: pointer;
 }
 
-button:hover {
+/* button:hover {
   color: white;
   background-color: #1d6154;
-}
-
-/* ***************************************** */
+} */
 
 #modale {
   visibility: hidden;
@@ -299,7 +296,6 @@ button:hover {
   right: 20px;
   z-index: 1000;
 }
-/* ************************************************ */
 
 .stamp-images {
   position: relative;
@@ -340,7 +336,6 @@ button:hover {
   color: white;
   background-color: black;
 }
-/* ****************************************************** */
 #modal-add-photo {
   display: flex;
   flex-direction: column;
@@ -527,7 +522,6 @@ input[type="text"] {
   cursor: pointer;
 }
 
-/* ************************************************************** */
 .gallery {
   width: 90%;
   display: grid;
